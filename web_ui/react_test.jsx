@@ -9,7 +9,7 @@ class TestComponent extends React.Component {
         )
     }
 }
-React.render(
+ReactDOM.render(
     <TestComponent />,
     document.getElementById('app')
 );
