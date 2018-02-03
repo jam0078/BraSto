@@ -10,19 +10,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
   <body>
-    <div id="content"></div>
+    <table class="type01">
+        <tr>
+            <th scope="row">項目名</th>
+            <td>
+                <div id="card1"></div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">項目名</th>
+            <td>内容がはいります。</td>
+        </tr>
+        <tr>
+            <th scope="row">項目名</th>
+            <td><div id="card2"></div></td>
+        </tr>
+    </table>
+
     <script type="text/babel">
-        const Hello = React.createClass({
-            render: function() {
-                return (
-                    <div dangerouslySetInnerHTML={{__html: '<html><body><table border="0" cellpadding="10"><tr><td valign="top">セル1</td><td valign="top">セル2</td></tr></table></body></html>'}} />
-                );
-            }
-        });
+        // 反復ここから（for？）－－－－－－－－
+
+        // DBからデータ取得
+        
+        // Input系の描画
+
+        // Output系の描画
+        function BraStoResultCard(props) {
+               return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
+        }
         ReactDOM.render(
-            <Hello />,
-            document.getElementById('content')
+            <BraStoResultCard htmlstring={'<h1>Hello1</h1>'}/>,
+            document.getElementById('card1')
         );
+        ReactDOM.render(
+            <BraStoResultCard htmlstring={'<h1>Hello2</h1>'}/>,
+            document.getElementById('card2')
+        );
+        
+        // 反復ここまで（for？）－－－－－－－－
     </script>
   </body>
 </html>
