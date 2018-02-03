@@ -12,4 +12,4 @@ def handler(event, context):
     dynamodb = boto3.resource('dynamodb')
     table    = dynamodb.Table('sessions')
     response = table.scan()['Items'][0]
-    return json.dumps(response, default=decimal_default_proc)
+    return response
