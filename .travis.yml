@@ -1,5 +1,6 @@
-language: bash
-script: echo "do nothing in script"
+language: node_js
+node_js:
+  - "node"
 deploy:
   provider: s3
   access_key_id:
@@ -9,5 +10,6 @@ deploy:
   bucket: atlab006-user1-public
   endpoint: s3-ap-northeast-1.amazonaws.com
   region: ap-northeast-1
+  local-dir: web_ui
   on:
     branches: master
