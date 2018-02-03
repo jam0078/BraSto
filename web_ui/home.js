@@ -2,8 +2,8 @@
 //DynamoDBからデータ(json)を取得
 var url = "https://t7hw7v6l5b.execute-api.ap-northeast-1.amazonaws.com/prod/"; // リクエスト先URL
 var request = new XMLHttpRequest();
-request.open('GET', url);
-request.setRequestHeader('x-api-key','MzP5oJqWoy72R2ElfEfbc62WpIE3ge8J6ItaoI3C');
+request.open("GET", url, true);
+request.setRequestHeader("x-api-key","MzP5oJqWoy72R2ElfEfbc62WpIE3ge8J6ItaoI3C");
 request.onreadystatechange = function () {
     if (request.readyState != 4) {
         // リクエスト中
@@ -15,15 +15,28 @@ request.onreadystatechange = function () {
         console.log("success");
         // 取得成功
         var result = request.responseText;
-
+        console.log(result);
     }
-    var jsontext = JSON.stringify(result);
+    //var jsontext = JSON.stringify(result);
+    var jsontext = JSON.parse(result);
+    //var jsontext2 = JSON.parse(JSON.parse(result));
     console.log(jsontext);
+    //console.log(jsontext2);
+    console.log(jsontext.session_id);
     //var elem = document.getElementById("textarea1");
+    //var elem = document.getElementById("graph");
+
+    function DataFromDB() {
+        //var jsontext = JSON.stringify(text);
+        var jsond = JSON.parse(result);
+        var elem = document.getElementById("textarea1");
+        elem.innerText = jsontext;
+      }
+
+
+
 };
 request.send();
-//request.send(null);
-
 
 
 //DynamoDBからデータ(json)を取得した前提
@@ -119,9 +132,9 @@ function autoUpdate() {
   };
 
   //1秒ごとに関数を定期実行
-  setInterval(function() {
+  //setInterval(function() {
     // console.log("hoge");
-    console.log(jsontext.channel_members);
+    //console.log(jsontext.channel_members);
 　　//console.log(dbdata.slack_group);
 　　//console.log(dbdata.slack_channel)
     
@@ -134,7 +147,7 @@ function autoUpdate() {
 //     target1.innerHTML = "Lion";
 //   }
 
-}, 1000);
+//}, 1000);
 
 
 
