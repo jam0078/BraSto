@@ -5,6 +5,9 @@
      <head>
        <meta charset="UTF-8" />
        <title>Brasto by no idea</title>
+       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+       <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+       <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
        <script type="text/javascript" src="./index.js"></script>
 
      </head>
@@ -17,7 +20,7 @@
           
                 <div class="input-group input-group-lg">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" class="form-control" placeholder="Username or email">
+                  <input type="text" class="form-control" placeholder="slack account email">
                     </div>
           
                   <div class="input-group input-group-lg">
@@ -25,9 +28,35 @@
                     <input type="password" class="form-control" placeholder="Password">
                   </div>
           
-                  <button type="submit" class="float">Login</button>
-                 </form>
+                  <!-- 新規の場合Slack認証 -->
+                  <button id="add" type="submit" class="form-control">新規</button>
+                  <!-- 既存の場合はチャネルの認証？-->
+                  
+                  <button id="add" type="submit" class="form-control">既存</button>
                    </div>
+           
+           <div class="input-group input-group-lg" id="slack-id">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="id" class="form-control" placeholder="id">
+                <input type="button" value="submit" onclick="OnButtonClick2();"/><br />
+              </div>
+
+              <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="slack account email">
+                      </div>
+                      
+                      <div class="input-group input-group-lg">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" placeholder="Password">
+                          </div>
+
+
+           <!-- <input type="button" value="(ボタンのキャプション)" onclick="(実行するJavaScriptのコード)"/> -->
+           <input type="button" value="Exec" onclick="OnButtonClick();"/><br />
+           <br />
+           <div id="output"></div>
+
            </div>
      </body>
    </html>
