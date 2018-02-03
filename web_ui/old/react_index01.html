@@ -1,0 +1,152 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Brast by no idea</title>
+    <!-- Reactモジュール読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <!-- マテリアルデザインモジュール -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="./react_index01.css">
+
+</head>
+
+
+<body>
+        <!-- Wide card with share menu button -->
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">HHHH</h2>
+                </div> 
+                <div class="mdl-card__supporting-text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                  
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Get Started
+                  </a>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">share</i>
+                  </button>
+                </div>
+        </div>
+        <br>
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                
+                  <h2 class="mdl-card__title-text" id="card1">HHHH</h2>
+                </div> 
+                <div class="mdl-card__supporting-text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                  
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Get Started
+                  </a>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">share</i>
+                  </button>
+                </div>
+        </div>
+
+
+        <script type="text/babel">
+        //<!--  Output系の描画 -->
+        function BraStoResultCard(props) {
+               return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
+        }
+        ReactDOM.render(
+            // <BraStoResultCard htmlstring={'Hello1aaaaaaaaaaaaaaa'}/>,
+            "testtttt",
+            document.getElementById('card1')
+        );
+        </script>
+
+
+
+<script type="text/babel">
+//DynamoDBからデータ(json)を取得
+var url = "https://t7hw7v6l5b.execute-api.ap-northeast-1.amazonaws.com/prod"; // リクエスト先URL
+var request = new XMLHttpRequest();
+request.open("GET", url, true);
+request.setRequestHeader("x-api-key","MzP5oJqWoy72R2ElfEfbc62WpIE3ge8J6ItaoI3C");
+request.onreadystatechange = function () {
+    if (request.readyState != 4) {
+        // リクエスト中
+        console.log("request");
+    } else if (request.status != 200) {
+        // 失敗
+        console.log("fail");
+    } else {
+        console.log("success");
+        // 取得成功
+        var result = request.responseText;
+        console.log(result);
+    }
+    //var jsontext = JSON.stringify(result);
+    var jsontext = JSON.parse(result);
+    //var jsontext2 = JSON.parse(JSON.parse(result));
+    console.log(jsontext);
+    //console.log(jsontext2);
+    console.log(jsontext.session_id);
+    //var elem = document.getElementById("textarea1");
+    //var elem = document.getElementById("graph");
+
+    function DataFromDB() {
+        //var jsontext = JSON.stringify(text);
+        var jsond = JSON.parse(result);
+        var elem = document.getElementById("textarea1");
+        elem.innerText = jsontext;
+      }
+
+
+
+};
+request.send();
+</script>
+
+    <!-- <table class=値
+        // 反復ここから（for？）－－－－－－－－
+
+        // DBからデータ取得
+        
+        // Input系の描画
+
+        // Output系の描画
+        function BraStoResultCard(props) {
+               return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
+        }
+        ReactDOM.render(
+            <BraStoResultCard htmlstring={'<h1>Hello1</h1>'}/>,
+            document.getElementById('card1')
+        );
+        ReactDOM.render(
+            <BraStoResultCard htmlstring={'<h1>Hello2</h1>'}/>,
+            document.getElementById('card2')
+        );
+        
+        // 反復ここまで（for？）－－－－－－－－ 
+    </script>-->
+  </body>
+</html>
