@@ -15,10 +15,7 @@
         const Hello = React.createClass({
             render: function() {
                 return (
-                    <div>
-                    <h1>Hello,React!</h1>
-                    <h2>{(new Date()).toString()}</h2>
-                    </div>
+                    <div dangerouslySetInnerHTML={{__html: '<html><body><table border="0" cellpadding="10"><tr><td valign="top">セル1</td><td valign="top">セル2</td></tr></table></body></html>'}} />
                 );
             }
         });
