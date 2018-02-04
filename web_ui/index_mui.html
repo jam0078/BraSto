@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- load MUI -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.muicss.com/mui-0.9.36/css/mui.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.muicss.com/mui-0.9.36/react/mui-react.js"></script>
+    
+    <!-- load React -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <!-- load CSS -->
+    <link rel="stylesheet" href="./home.css">
+
+    <!-- load Jacascript -->
+    <script type="text/javascript" src="./home.js"></script>
+
+  </head>
+  <style>
+      #view-source {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        z-index: 900;
+      }
+      </style>
+    <!-- title on web browser -->
+    <title>Brasto by no idea</title>
+
+    <script>
+        function add()
+        {
+            var div_element = document.createElement("div");
+            div_element.innerHTML = '<hr>Title: <br><input type="text" name="title" size="50" value="試験文字列"><br>Contents: <br><textarea name="contents" rows="30" cols="100">試験\n試験\n試験</textarea>';
+            
+            var parent_object = document.getElementById("piyo");
+            parent_object.appendChild(div_element);
+        }
+    </script>
+
+    <body>
+
+        <div>
+            <button onclick="add();">このボタンを押して動的にUIを追加！</button>
+            </div>
+            <div id="piyo"></div>
+
+    <div id="example"></div>
+    <div id="card1"></div>
+
+
+    <script type="text/babel">
+      let Appbar = mui.react.Appbar,
+          Button = mui.react.Button,
+          Container = mui.react.Container;
+
+      class Example extends React.Component {
+        render() {
+          return (
+            <div>
+              <Appbar></Appbar>
+              <Container>
+                <Button color="primary">button</Button>
+              </Container>
+            </div>
+          );
+        }
+    }
+    ReactDOM.render(<Example />, document.getElementById('example'));
+
+    function BraStoResultCard(props) {
+        return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
+    }
+    ReactDOM.render(
+        // <BraStoResultCard htmlstring={'<h1>Hello1</h1>'}/>,
+          <BraStoResultCard htmlstring={'<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a> -->
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a> -->
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>About us</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+        </nav>' }/>,
+        document.getElementById('card1')
+    );
+    </script>
+  </body>
+</html>
