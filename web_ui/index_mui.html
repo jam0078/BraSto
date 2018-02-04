@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8">
 
+
+    <!-- ライブラリの読み込み -->
     <!-- load MUI -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.muicss.com/mui-0.9.36/css/mui.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.muicss.com/mui-0.9.36/react/mui-react.js"></script>
     
-    <!-- load React -->
+    <!-- load React :最初の2行Reactライブラリ,3行目Javascript文法構文を拡張するJSXを有効化-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -20,46 +22,48 @@
     <script type="text/javascript" src="./home.js"></script>
 
   </head>
-  <style>
-      #view-source {
-        position: fixed;
-        display: block;
-        right: 0;
-        bottom: 0;
-        margin-right: 40px;
-        margin-bottom: 40px;
-        z-index: 900;
-      }
-      </style>
-    <!-- title on web browser -->
-    <title>Brasto by no idea</title>
 
-    <script>
-        function add()
-        {
-            var div_element = document.createElement("div");
-            div_element.innerHTML = '<hr>Title: <br><input type="text" name="title" size="50" value="試験文字列"><br>Contents: <br><textarea name="contents" rows="30" cols="100">試験\n試験\n試験</textarea>';
-            
-            var parent_object = document.getElementById("piyo");
-            parent_object.appendChild(div_element);
-        }
-    </script>
-
-    <body>
-
-        <div>
-            <button onclick="add();">このボタンを押して動的にUIを追加！</button>
-            </div>
-            <div id="piyo"></div>
-
+    <!-- 要素の定義 :Reactで書き換える要素をDIV要素で記述.Javascriptから参照可能にする-->
     <div id="example"></div>
     <div id="card1"></div>
+    <div id="disp"></div>
 
 
-    <script type="text/babel">
+    <!-- example content -->
+    <div class="mui-container">
+        <div class="mui-panel">
+          <h1>My Title</h1>
+          <button class="mui-btn mui-btn--primary mui-btn--raised">My Button</button>
+        </div>
+        <div class="mui-card">
+            <h1>My Title</h1>
+            <button class="mui-btn mui-btn--primary mui-btn--raised">My Card</button>
+          </div>
+    </div>
+
+
+
+    <!-- スクリプトの定義 :Javascriptの定義 JSX使用のためtype属席はtext/babelとする-->
+    <script type="text/babel">      
+      //変数・定数定義
       let Appbar = mui.react.Appbar,
           Button = mui.react.Button,
           Container = mui.react.Container;
+
+          //挨拶をしてDOMに設定するサンプル
+      const root = document.querySelector('#disp')
+      const msg = getGreeting()
+      ReactDOM.render(msg,root)
+          //挨拶返す関数
+          function getGreeting () {
+            //randomな値を取得
+            const r = Math.floor(Math.random() * 3)
+            //値に応じてメッセージを返す
+            if (r === 0) return <p>AAAAAAAAAAAAAA</p>
+            if (r === 1) return <p>BBBBBBBBBBBBBB</p>
+            if (r === 2) return <p>CCCCCCCCCCCCCC</p>                        
+          }
+
 
       class Example extends React.Component {
         render() {
