@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
 
-
     <!-- ライブラリの読み込み -->
     <!-- load MUI -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,10 +15,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
     <!-- load CSS -->
-    <link rel="stylesheet" href="./home.css">
+    <!-- <link rel="stylesheet" href="./home.css"> -->
 
     <!-- load Jacascript -->
-    <script type="text/javascript" src="./home.js"></script>
+    <!-- <script type="text/javascript" src="./home.js"></script> -->
 
   </head>
 
@@ -28,6 +27,9 @@
     <div id="card1"></div>
     <div id="disp"></div>
     <div id="time"></div>
+    <div id="time1"></div>
+    <div id="greet"></div>    
+
 
     <!-- example content -->
     <div class="mui-container">
@@ -56,6 +58,7 @@
 
     <!-- スクリプトの定義 :Javascriptの定義 JSX使用のためtype属席はtext/babelとする-->
     <script type="text/babel">      
+
       //変数・定数定義
       let Appbar = mui.react.Appbar,
           Button = mui.react.Button,
@@ -80,10 +83,18 @@
     //     render() {
     //       return (
     //         <div>
-    //           <Appbar></Appbar>
-    //           <Container>
-    //             <Button color="primary">button</Button>
-    //           </Container>
+    //           <div className="mui--text-display4">Display4</div>
+    //           <div className="mui--text-display3">Display3</div>
+    //           <div className="mui--text-display2">Display2</div>
+    //           <div className="mui--text-display1">Display1</div>
+    //           <div className="mui--text-headline">Headline</div>
+    //           <div className="mui--text-title">Title</div>
+    //           <div className="mui--text-subhead">Subhead</div>
+    //           <div className="mui--text-body2">Body2</div>
+    //           <div className="mui--text-body1">Body1</div>
+    //           <div className="mui--text-caption">Caption</div>
+    //           <div className="mui--text-menu">Menu</div>
+    //           <div className="mui--text-button">Button</div>
     //         </div>
     //       );
     //     }
@@ -94,27 +105,92 @@
         return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
     }
     ReactDOM.render(
-         <BraStoResultCard htmlstring={'<h1>Hello1</h1>'}/>,
+         <BraStoResultCard htmlstring={'<h1>Brast by no idea</h1>'}/>,
         document.getElementById('card1')
     );
 
 
-
+     ///////////時計を2桁ずつそろえて表示してみる///////////////////////
     //定期的に時間を表示
     setInterval(showClock, 1000)
     //毎秒実行される関数
     function showClock () {
       const d = new Date()
-      const hour = d.getHours()
-      const min = d.getMinutes()
-      const sec = d.getSeconds()
+      const [hour, min, sec] = [ //時分秒を各変数に代入
+      d.getHours(),
+      d.getMinutes(),
+      d.getSeconds() ]
+      const z2 = (v) => { //0で埋めて表示する関数を定義
+        const s = "00" + v
+        return s.substr(s.length - 2,2)
+      }
+      //表示するDOMを指定
       const elem = <div>
-          {hour}:{min}:{sec}
-          </div>;
-      const time = document.getElementById("time")
-      ReactDOM.render(elem,time)
+         {z2(hour)}:{z2(min)}:{z2(sec)}
+         </div>;
+         //DOMを書き換える
+      //const time = document.getElementById("time")
+      //ReactDOM.render(elem,time)
+      ReactDOM.render(elem,document.getElementById("time"))
      }
-    
+
+     ///////////バイナリ時計を表示してみる///////////////////////
+     // 定期的に画面を更新するよう指定
+     setInterval(update, 1000)
+     // タイマーを更新する
+     function update () {
+       //現在時刻を二進数に変換
+       const now = new Date();
+       const hh = zz2(now.getHours())
+       const mm = zz2(now.getMinutes())       
+       const ss = zz2(now.getSeconds())
+       const binStr = hh + mm + ss
+       const style0 = {color: 'brown'}
+       const style1 = {color: 'red'}
+       const lines = []
+
+       for (let i = 0; i < binStr.length; i++){
+         const v = parseInt(binStr.substr(i,1))
+         const bin = "0000" + v.toString(2)//時分秒の各桁を2進数に変換
+         const bin8 = bin.substr(bin.length - 4, 4)
+         //二進数を構成するReactオブジェクトを配列linesに追加
+         for (let j = 0; j < bin8.length; j++){
+           if (bin8.substr(j,1) === '0') {
+           lines.push(<span style={style0}>○</span>)
+           } else {
+           lines.push(<span style={style1}>●</span>)
+           }
+         }
+         lines.push(<br />)
+       }
+       //DOMを書き換え
+       const time1 = document.getElementById('time1')
+       ReactDOM.render(<div>{lines}</div>, time1)
+     }
+
+     function zz2 (v) {
+       v = String("00" + v)
+       return v.substr(v.length - 2,2)
+     }
+
+
+     ///////////Reactでコンポーネントを作成してみる///////////////////////
+     //Reactでコンポーネント定義したところ
+     function Greeting (props) {
+       return <h1>{props.type}</h1>
+     }
+     //↑1度コンポーネントを定義したら、それを、通常のJSXタグと同じ用に利用可能
+     
+     //Greetingコンポーネントを利用する
+     const dom = <div>
+        <Greeting type= "Good morning" />
+        <Greeting type= "Hello" />
+        <Greeting type= "Good afternoon" />
+      </div>
+
+      //Reactで表示する
+      ReactDOM.render (dom, document.getElementById('greet'))
+
     </script>
   </body>
 </html>
