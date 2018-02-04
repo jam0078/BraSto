@@ -28,32 +28,10 @@
     <div id="disp"></div>
     <div id="time"></div>
     <div id="time1"></div>
-    <div id="greet"></div>    
+    <div id="greet"></div>
+    <div id="picture"></div>    
+    <div id="class"></div>  
 
-
-    <!-- example content -->
-    <div class="mui-container">
-        <div class="mui-panel">
-          <h1>My Title</h1>
-          <button class="mui-btn mui-btn--primary mui-btn--raised">My Button</button>
-        </div>
-        <div class="mui-card">
-            <h1>My Title</h1>
-            <button class="mui-btn mui-btn--primary mui-btn--raised">My Card</button>
-          </div>
-          <div class="mui-panel">
-              <h1>My Title</h1>
-              <button class="mui-btn mui-btn--primary mui-btn--raised">
-                <div id="disp"></div>
-              </button>
-            </div>
-    </div>
-
-    <div class="mui-container">
-        <div class="mui-panel">
-            <div id="disp"></div>
-          </div>
-        </div>
 
 
     <!-- スクリプトの定義 :Javascriptの定義 JSX使用のためtype属席はtext/babelとする-->
@@ -177,7 +155,7 @@
      ///////////Reactでコンポーネントを作成してみる///////////////////////
      //Reactでコンポーネント定義したところ
      function Greeting (props) {
-       return <h1>{props.type}</h1>
+       return <h3>{props.type}</h3>
      }
      //↑1度コンポーネントを定義したら、それを、通常のJSXタグと同じ用に利用可能
      
@@ -191,6 +169,70 @@
       //Reactで表示する
       ReactDOM.render (dom, document.getElementById('greet'))
 
+      ///////////Reactで画像付きテキストコンポーネントを作成してみる/////////////////
+      //コンポーネントを利用
+      const dom1 = <div>
+        <PhotoText image="icon-iine" label="fixed words list" />
+        <PhotoText image="icon-news" label="related news" />
+        <PhotoText image="icon-twitter01" label="related tweet" />
+      </div>
+      //ReactでDOMを書き換え
+      ReactDOM.render(dom1, document.getElementById('picture'))
+      //関数でコンポーネントを定義
+      function PhotoText (props){
+        const url = "./brastImages/" + props.image + ".jpeg"
+        const label = props.label
+        const boxStyle = {
+          border: "1px solid silver",
+          margin: "8px",
+          padding: "4px"
+        }
+        return <div style={boxStyle}>
+               <img src={url} width="128"/>
+               <span> {label} </span>
+        </div>
+      }
+
+
+      //クラスでコンポーネントを扱う
+      //0205 平賀君の書いてくれているサンプル同様ここでコンソールにエラーが出ており
+      //うまくクラス定義できていない模様
+      class Aisatsu extends React.component {
+        render () {
+          return <h3>{this.props.type}</h3>
+        }
+      }
+      //コンポーネントの利用
+      const dom2 = <div>
+        <Aisatsu type = "hi" />
+        <Aosatsu type = "oh" />
+      </div>
+      //ReactでDOMを書き換え
+      ReactDOM.render(dom2, documentElementById('class'))
+
+
+
+
     </script>
+
+    <!-- example content -->
+    <div class="mui-container">
+        <div class="mui-panel">
+          <h1>My Title</h1>
+          <button class="mui-btn mui-btn--primary mui-btn--raised">My Button</button>
+        </div>
+        <div class="mui-card">
+            <h1>My Title</h1>
+            <button class="mui-btn mui-btn--primary mui-btn--raised">My Card</button>
+          </div>
+          <div class="mui-panel">
+              <h1>My Title</h1>
+              <button class="mui-btn mui-btn--primary mui-btn--raised">
+                <!-- reactの要素を埋め込めるかやろうとしたが、、 -->
+                <div id="disp"></div>
+              </button>
+            </div>
+    </div>
+
   </body>
 </html>
