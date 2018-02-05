@@ -23,17 +23,72 @@
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
 
-    <!-- load CSS -->
-    <!-- <link rel="stylesheet" href="./home.css"> -->
+    <!-- load CSS from home.html -->
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="./home.css">
+
 
     <!-- load Jacascript -->
     <!-- <script type="text/javascript" src="./home.js"></script> -->
 
+    
   </head>
+<body>
+    <!-- 画面上部のHeaderメニュー:固定要素-->
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+          <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">Home:Brasto by no idea</span>
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+              <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i>
+              </label>
+              <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="search">
+                <label class="mdl-textfield__label" for="search">Enter your query...</label>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+              <li class="mdl-menu__item">About</li>
+              <li class="mdl-menu__item">Contact</li>
+              <li class="mdl-menu__item">Legal information</li>
+            </ul>
+          </div>
+        </header>
+      <!-- 画面左のツリーメニュー画面 ：固定要素-->
+          
+      <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a> -->
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a> -->
+          <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a> -->
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>About us</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+        </nav>
+      </div>
+
+
+        
 
     <!-- 要素の定義 :Reactで書き換える要素をDIV要素で記述.Javascriptから参照可能にする-->
     <div id="example"></div>
     <div id="card1"></div>
+    <div id="card2"></div>
     <div id="disp"></div>
     <div id="time"></div>
     <div id="time1"></div>
@@ -92,13 +147,45 @@
     function BraStoResultCard(props) {
         return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
     }
+    const cardelm = <div>
+        <h1>card1</h1>
+        <h3>cardの中に時計</h3>
+        <div id="time"></div>
+
+         </div>;
+
     ReactDOM.render(
-         <BraStoResultCard htmlstring={'<h1>Brast by no idea</h1>'}/>,
-        document.getElementById('card1')
+        //  <BraStoResultCard htmlstring={<div>'<h1>Brast by no idea</h1>'</div>,
+        // document.getElementById('card1')
+        cardelm,document.getElementById('card1')
     );
 
+    function BraStoResultCard2(props) {
+        return(<span dangerouslySetInnerHTML={{__html: props.htmlstring}}></span>);
+    }
+    const cardelm2 = <div>
+        <h1>card2</h1>
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                <h2 class="mdl-card__title-text">Updates</h2>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                Non dolore elit adipisicing ea reprehenderit consectetur culpa.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+              </div>
+            </div>        
+         </div>
+         </div>;
 
-     ///////////時計を2桁ずつそろえて表示してみる///////////////////////
+    ReactDOM.render(
+        //  <BraStoResultCard htmlstring={<div>'<h1>Brast by no idea</h1>'</div>,
+        cardelm2,document.getElementById('card2')
+    );
+
+        ///////////時計を2桁ずつそろえて表示してみる///////////////////////
     //定期的に時間を表示
     setInterval(showClock, 1000)
     //毎秒実行される関数
@@ -121,6 +208,10 @@
       //ReactDOM.render(elem,time)
       ReactDOM.render(elem,document.getElementById("time"))
      }
+
+
+
+
 
      ///////////バイナリ時計を表示してみる///////////////////////
      // 定期的に画面を更新するよう指定
@@ -269,6 +360,13 @@
       ReactDOM.render (dom3, document.getElementById('classpic'))
 
 
+
+
+
+
+
+
+    
     </script>
 
     <!-- example content -->
