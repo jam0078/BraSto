@@ -14,9 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
     <!-- Reactライブラリの取り込み ─── -->
- 　 <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+ <!-- 　 <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
  　 <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
- 　 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+ 　 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script> -->
   
 
 
@@ -283,27 +283,13 @@
     <!-- DynamoBDからのDB情報取得スクリプト(JS)-->
     <script src="data_loader.js"></script>
 
-
-    <!-- HTML内 Javascript好文 -->
     <script type="text/babel">
-
-
-
-
-
-
-      // TODO:コンテンツのHTML化
-      function SlackInfo(props) {
-          // Slackチャネル名
-          return(<p>{"Slack:"+props.channel}</p>);
-      }
       function MembersCloud(props) {
           // TODO:ループで複数要素を出力
-
-          return(<ul>{props.members.map(member => <li>{member.name}</li>)}</ul>);
+          return(<ul>{props.members.map(member => <li key={member.id}>{member.name}</li>)}</ul>);
       }
       function LatestComments(props) {
-          return(<ul>{props.latest_comments.map(latest_comments => <li>{latest_comments.comment}</li>)}</ul>);
+          return(<ul>{props.latest_comments.map((comment, key) => <li key={key}>{comment.comment}</li>)}</ul>);
           //return(<p>{props.x}</p>);
       }
       function KeywordCloud(props) {
@@ -367,61 +353,60 @@
         //     <BraStoResultCards x={JSON.stringify(data.result)}/>,
         //     document.getElementById('results')
         // );
-        console.log("ok");
+        setTimeout(renderAll, 1000);
       }
       renderAll();
-      setInterval(renderAll(), 3000);
 
       ///////////Reactで画像付きテキストコンポーネントを作成してみる/////////////////
       //コンポーネントを利用
-      const dom1 = <div>
-        <PhotoText image="icon-iine" id="picture" />
-        <PhotoText image="icon-news" label="related news" />
-        <PhotoText image="icon-twitter01" label="related tweet" />
-      </div>
-      //ReactでDOMを書き換え
-      ReactDOM.render(dom1, document.getElementById('picture'))
-      //関数でコンポーネントを定義
-      function PhotoText (props){
-        const url = "./brastImages/" + props.image + ".jpeg"
-        const label = props.label
-        const boxStyle = {
-          border: "1px solid silver",
-          margin: "8px",
-          padding: "4px"
-        }
-        return <div style={boxStyle}>
-               <img src={url} width="128"/>
-               <span> {label} </span>
-        </div>
-      }
+    //   const dom1 = <div>
+    //     <PhotoText image="icon-iine" id="picture" />
+    //     <PhotoText image="icon-news" label="related news" />
+    //     <PhotoText image="icon-twitter01" label="related tweet" />
+    //   </div>
+    //   //ReactでDOMを書き換え
+    //   ReactDOM.render(dom1, document.getElementById('picture'))
+    //   //関数でコンポーネントを定義
+    //   function PhotoText (props){
+    //     const url = "./brastImages/" + props.image + ".jpeg"
+    //     const label = props.label
+    //     const boxStyle = {
+    //       border: "1px solid silver",
+    //       margin: "8px",
+    //       padding: "4px"
+    //     }
+    //     return <div style={boxStyle}>
+    //            <img src={url} width="128"/>
+    //            <span> {label} </span>
+    //     </div>
+    //   }
 
 
-              ///////////時計を2桁ずつそろえて表示してみる///////////////////////
-    //定期的に時間を表示
-    setInterval(showClock, 1000)
-    //毎秒実行される関数
-    function showClock () {
-      const d = new Date()
-      const [hour, min, sec] = [ //時分秒を各変数に代入
-      d.getHours(),
-      d.getMinutes(),
-      d.getSeconds() ]
-      const z2 = (v) => { //0で埋めて表示する関数を定義
-        const s = "00" + v
-        return s.substr(s.length - 2,2)
-      }
-      //表示するDOMを指定
-      const elem = <div>
-         {z2(hour)}:{z2(min)}:{z2(sec)}
-         </div>;
-         //DOMを書き換える
-      //const time = document.getElementById("time")
-      //ReactDOM.render(elem,time)
-      ReactDOM.render(elem,document.getElementById('time'))
-     }
+    //           ///////////時計を2桁ずつそろえて表示してみる///////////////////////
+    // //定期的に時間を表示
+    // setInterval(showClock, 1000)
+    // //毎秒実行される関数
+    // function showClock () {
+    //   const d = new Date()
+    //   const [hour, min, sec] = [ //時分秒を各変数に代入
+    //   d.getHours(),
+    //   d.getMinutes(),
+    //   d.getSeconds() ]
+    //   const z2 = (v) => { //0で埋めて表示する関数を定義
+    //     const s = "00" + v
+    //     return s.substr(s.length - 2,2)
+    //   }
+    //   //表示するDOMを指定
+    //   const elem = <div>
+    //      {z2(hour)}:{z2(min)}:{z2(sec)}
+    //      </div>;
+    //      //DOMを書き換える
+    //   //const time = document.getElementById("time")
+    //   //ReactDOM.render(elem,time)
+    //   ReactDOM.render(elem,document.getElementById('time'))
+    //  }
 
-      // TODO:ループを閉じる
+    //   // TODO:ループを閉じる
     </script>
   </body>
 </html>
