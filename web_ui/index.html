@@ -100,7 +100,10 @@
           <header class="demo-drawer-header">
             <img src="brastImages/icon-analytics.jpeg" class="demo-avatar">
             <div class="demo-avatar-dropdown">
-              <span>hello@example.com</span>
+              
+              <!-- チャネル名の表示from dynamoDB -->
+              <span><td><div id="channel"></div></td></span>
+
               <div class="mdl-layout-spacer"></div>
               <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                 <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -163,21 +166,33 @@
                 </svg>
           </div>
 
+
+          
     <!-- TODO:配置のコントロール tableタグでよいかも？ -->
     <table>
       <tr>
         <td><div id="members"></div></td>
         <td><div id="latestcomments"></div></td>
+
         <td><div id="keywords"></div></td>
+        <td><div id="fixed"></div></td>
+        <td><div id="volatile"></div></td>
       </tr>
       <tr>
         <td colspan="3"><div id="results"></div></td>
       </tr>
     </table>
+
+
     <script src="data_loader.js"></script>
     <script type="text/babel">
       //import 'data_loader'
       // TODO:コンテンツのHTML化
+
+      function SlackInfo(props) {
+          // Slackチャネル名
+          return(<p>{"Slack:"+props.channel}</p>);
+      }
       function MembersCloud(props) {
           // TODO:ループで複数要素を出力
           return(<ul>{props.members.map(member => <li>{member.name}</li>)}</ul>);
@@ -190,14 +205,27 @@
           return(<h2>{props.x}</h2>);
       }
       function BraStoResultCards(props) {
-          return(<h3>{props.x}</h3>);
+          return(<h4>{props.x}</h4>);
+      }
+      function BraStoFeixedWords(props) {
+          return(<h3>{props.fixedwords}</h3>);
+      }
+      function BraStoVolatileWords(props) {
+          return(<h4>{props.volatile}</h4>);
       }
       // TODO:ループを回す
         // TODO:DBからデータ取得する（別jsファイルに切り出してここでは関数コールのみ）
         var data = load_data();
         // TODO:必要な引数の受け渡し
+        
+        //Slack情報：チャネル名
         ReactDOM.render(
-            <MembersCloud members={data.channel_members}/>,
+            <SlackInfo channel={data.slack_info.channel}/>,
+            document.getElementById('channel')
+        );
+        //Slack情報：メンバー情報
+        ReactDOM.render(
+            <MembersCloud members={data.slack_info.members}/>,
             document.getElementById('members')
         );
         ReactDOM.render(
@@ -207,13 +235,23 @@
             document.getElementById('latestcomments')
         );
         ReactDOM.render(
-            <KeywordCloud x={'キーワード'}/>,
-            document.getElementById('keywords')
+           <BraStoFeixedWords fixedwords={data.fixed_words}/>,
+            document.getElementById('fixed')
         );
+        // ReactDOM.render(
+        //     <BraStoResultCards x={JSON.stringify(data.result)}/>,
+        //     document.getElementById('results')
+        // );
         ReactDOM.render(
-            <BraStoResultCards x={JSON.stringify(data)}/>,
-            document.getElementById('results')
+            <BraStoVolatileWords volatile={data.volatile_words}/>,
+            document.getElementById('volatile')
         );
+        // ReactDOM.render(
+        //     <BraStoResultCards x={JSON.stringify(data.result)}/>,
+        //     document.getElementById('results')
+        // );
+
+
         // TODO:一定時間待つ
 
       // TODO:ループを閉じる
