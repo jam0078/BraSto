@@ -64,152 +64,8 @@
         }
         </style>
 
-
-<script type="text/javascript" src="d3/d3.min.js"></script>
-<script type="text/javascript" src="d3/d3.js"></script>
-
   </head>
   <body>
-
- 
-      <style>
-          body {
-            position: relative;
-            font-family: "Helvetica Neue", sans-serif;
-            width: 960px;
-            margin: auto;
-            margin-bottom: 1em;
-            margin-top: 20px;
-          }
-          #presets a { border-left: solid #666 1px; padding: 0 10px; }
-          #presets a.first { border-left: none; }
-          #keyword { width: 300px; }
-          #fetcher { width: 500px; }
-          #keyword, #go { font-size: 1.5em; }
-          #text { width: 100%; height: 100px; }
-          p.copy { font-size: small; }
-          #form { font-size: small; position: relative; }
-          hr { border: none; border-bottom: solid #ccc 1px; }
-          a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; }
-          #angles line, #angles path, #angles circle { stroke: #666; }
-          #angles text { fill: #333; }
-          #angles path.drag { fill: #666; cursor: move; }
-          #angles { text-align: center; margin: 0 auto; width: 350px; }
-          #angles input, #max { width: 42px; }
-          </style>
-          
-          <div id="vis"></div>
-          
-          <form id="form">
-          
-          <p style="position: absolute; right: 0; top: 0" id="status"></p>
-          
-          <div style="text-align: center">
-            <div id="presets"></div>
-            <div id="custom-area">
-              <p><label for="text">Paste your text below!</label>
-              <p><textarea id="text">
-          How the Word Cloud Generator Works
-          
-          The layout algorithm for positioning words without overlap is available on GitHub under an open source license as d3-cloud. Note that this is the only the layout algorithm and any code for converting text into words and rendering the final output requires additional development.
-          
-          As word placement can be quite slow for more than a few hundred words, the layout algorithm can be run asynchronously, with a configurable time step size. This makes it possible to animate words as they are placed without stuttering. It is recommended to always use a time step even without animations as it prevents the browser’s event loop from blocking while placing the words.
-          
-          The layout algorithm itself is incredibly simple. For each word, starting with the most “important”:
-          
-          Attempt to place the word at some starting point: usually near the middle, or somewhere on a central horizontal line.
-          If the word intersects with any previously placed words, move it one step along an increasing spiral. Repeat until no intersections are found.
-          The hard part is making it perform efficiently! According to Jonathan Feinberg, Wordle uses a combination of hierarchical bounding boxes and quadtrees to achieve reasonable speeds.
-          
-          Glyphs in JavaScript
-          
-          There isn’t a way to retrieve precise glyph shapes via the DOM, except perhaps for SVG fonts. Instead, we draw each word to a hidden canvas element, and retrieve the pixel data.
-          
-          Retrieving the pixel data separately for each word is expensive, so we draw as many words as possible and then retrieve their pixels in a batch operation.
-          
-          Sprites and Masks
-          
-          My initial implementation performed collision detection using sprite masks. Once a word is placed, it doesn't move, so we can copy it to the appropriate position in a larger sprite representing the whole placement area.
-          
-          The advantage of this is that collision detection only involves comparing a candidate sprite with the relevant area of this larger sprite, rather than comparing with each previous word separately.
-          
-          Somewhat surprisingly, a simple low-level hack made a tremendous difference: when constructing the sprite I compressed blocks of 32 1-bit pixels into 32-bit integers, thus reducing the number of checks (and memory) by 32 times.
-          
-          In fact, this turned out to beat my hierarchical bounding box with quadtree implementation on everything I tried it on (even very large areas and font sizes). I think this is primarily because the sprite version only needs to perform a single collision test per candidate area, whereas the bounding box version has to compare with every other previously placed word that overlaps slightly with the candidate area.
-          
-          Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block.
-          
-              </textarea>
-              <button id="go" type="submit">Go!</button>
-            </div>
-          </div>
-          
-          <hr>
-          
-          <div style="float: right; text-align: right">
-            <p><label for="max">Number of words:</label> <input type="number" value="250" min="1" id="max">
-            <p><label for="per-line"><input type="checkbox" id="per-line"> One word per line</label>
-            <!--<p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a>-->
-            <p><label>Download:</label>
-              <button id="download-svg">SVG</button><!-- |
-              <a id="download-png" href="#">PNG</a>-->
-          </div>
-          
-          <div style="float: left">
-            <p><label>Spiral:</label>
-              <label for="archimedean"><input type="radio" name="spiral" id="archimedean" value="archimedean" checked="checked"> Archimedean</label>
-              <label for="rectangular"><input type="radio" name="spiral" id="rectangular" value="rectangular"> Rectangular</label>
-            <p><label for="scale">Scale:</label>
-              <label for="scale-log"><input type="radio" name="scale" id="scale-log" value="log" checked="checked"> log n</label>
-              <label for="scale-sqrt"><input type="radio" name="scale" id="scale-sqrt" value="sqrt"> √n</label>
-              <label for="scale-linear"><input type="radio" name="scale" id="scale-linear" value="linear"> n</label>
-            <p><label for="font">Font:</label> <input type="text" id="font" value="Impact">
-          </div>
-          
-          <div id="angles">
-            <p><input type="number" id="angle-count" value="5" min="1"> <label for="angle-count">orientations</label>
-              <label for="angle-from">from</label> <input type="number" id="angle-from" value="-60" min="-90" max="90"> °
-              <label for="angle-to">to</label> <input type="number" id="angle-to" value="60" min="-90" max="90"> °
-          </div>
-          
-          <hr style="clear: both">
-          
-          <p style="float: right"><a href="about/">How the Word Cloud Generator Works</a>.
-          <p style="float: left">Copyright &copy; <a href="http://www.jasondavies.com/">Jason Davies</a> | <a href="../privacy/">Privacy Policy</a>. The generated word clouds may be used for any purpose.
-          
-          </form>
-          
-          <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;margin-left:116px" data-ad-client="ca-pub-2911491153890039" data-ad-slot="2029654015"></ins>
-          
-          <script src="d3/d3.min.js"></script>
-          <script src="cloud.min_.js"></script>
-          <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <script>
-          window.google_analytics_uacct = "UA-54563-3";
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-54563-3']);
-          _gaq.push(['_trackPageview']);
-          setTimeout(function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-          }, 1);
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <!-- 右上メニュー -->
@@ -277,15 +133,14 @@
                   </nav>
       </div>
 
-
-
+          
               <!-- Gridデモ画面 -->
               <main class="mdl-layout__content mdl-color--grey-100">
                   <div class="mdl-grid demo-content">
                     <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                       <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
                         <use xlink:href="#piechart" mask="url(#piemask)" />
-                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan font-size="0.2" dy="-0.07">%</tspan></text>
+                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">55<tspan font-size="0.2" dy="-0.07">%</tspan></text>
                       </svg>
 
                       <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
@@ -293,86 +148,80 @@
                         <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
                       </svg>
                       
-                      <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                        <use xlink:href="#piechart" mask="url(#piemask)" />
-                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-                      </svg>
-                     <!-- <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                        <use xlink:href="#piechart" mask="url(#piemask)" />
-                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-                      </svg>  -->
-          
                       <!-- from JS -->
-                <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                     <use xlink:href="#piechart" mask="url(#piemask)" />
-               <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1"><div id="latestcomments"></div><tspan dy="-0.07" font-size="0.2">%</tspan></text>
-                </svg>
+                      <svg fill="currentColor" width="600px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+                          <use xlink:href="#piechart" mask="url(#piemask)" />
+                    <text x="1.0" y="0.01" font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.1">latest comments-><tspan dy="-0.07" font-size="0.2"><div id="latestcomments"></div></tspan></text>
+                     </svg>
+     
+             <!-- upgdates部分画面 -->
+             <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                  <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                    <h2 class="mdl-card__title-text"><div id="members"></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                    Online members
+                  </div>
+
+                <!-- パーツ Read moreボタン -->
+                <!-- <div class="mdl-card__actions mdl-card--border">
+                  <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+                  </div> -->
+                </div>
+            <!-- upgdates部分画面 -->
+          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                  <h2 class="mdl-card__title-text"><div id="fixed"></div></h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                  fixed words
+                </div>
+  
+                 <!-- パーツ Read moreボタン -->
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+                </div>
+              </div>
+            </div>
           </div>
 
 
-          
-    <!-- TODO:配置のコントロール tableタグでよいかも？ -->
-    <table>
-      <tr>
-        <td><div id="members"></div></td>
-        <td><div id="latestcomments"></div></td>
 
-        <td><div id="keywords"></div></td>
-        <td><div id="fixed"></div></td>
-        <td><div id="volatile"></div></td>
-      </tr>
-      <tr>
-        <td colspan="3"><div id="results"></div></td>
-      </tr>
-    </table>
+          <!-- TODO:配置のコントロール tableタグでよいかも？ -->
+          <table>
+            <tr>
+              <!-- <td><div id="members"></div></td> -->
+              <td><div id="latestcomments"></div></td>
+              <td><div id="time"></div></td>
+              <td><div id="keywords"></div></td>
+              <!-- <td><div id="fixed"></div></td> -->
+            </tr>
+            <tr>
+              <td colspan="4"><div id="volatile"></div></td>
+            </tr>
+          </table>
 
+     
+   
 
-    
-    <!-- import 'data_loader' -->
     <script src="data_loader.js"></script>
-    <!-- import 'd3 script' -->
-    <script src="d3my.js"></script>
-
     <script type="text/babel">
-      
-// CSV の読み込み
-d3.csv('data.csv', function(csvdata) {
-  var dataset = [];
-  for (var i = 0; i < csvdata.length; i++) {
-      dataset.push(csvdata[i]['value']);
-  };
-  make(dataset);
-});
 
-// SVG にバーを描く
-function make(dataset) {
-  d3.select('svg').selectAll('rect')
-  .data(dataset)
-  .enter()
-  .append('rect')
-  .attr({
-      x : function(d, i){ return i * 30; },
-      y : function(d){ return 300 - d; },
-      width : 15,
-      height : function(d){ return d; },
-      fill : '#6fbadd'
-  });
-}
-
-
-
-
-
-
+// //    setInterval("autoUpdate()", 呼び出し間隔（ミリ秒）)
+// setInterval("autoUpdate()", 1000)
+// function autoUpdate() {
+//   };
 
       // TODO:コンテンツのHTML化
-
       function SlackInfo(props) {
           // Slackチャネル名
           return(<p>{"Slack:"+props.channel}</p>);
       }
       function MembersCloud(props) {
           // TODO:ループで複数要素を出力
+
           return(<ul>{props.members.map(member => <li>{member.name}</li>)}</ul>);
       }
       function LatestComments(props) {
@@ -388,8 +237,13 @@ function make(dataset) {
       function BraStoFeixedWords(props) {
           return(<h3>{props.fixedwords}</h3>);
       }
+      function BraStoFeixedWords(props) {
+          var str = props.fixedwords.join(',')
+          return(<h3>{str}</h3>);
+      }
       function BraStoVolatileWords(props) {
-          return(<h4>{props.volatile}</h4>);
+          var str = props.volatile.join(',')
+          return(<h4>{str}</h4>);
       }
       // TODO:ループを回す
         // TODO:DBからデータ取得する（別jsファイルに切り出してここでは関数コールのみ）
@@ -429,8 +283,56 @@ function make(dataset) {
         //     document.getElementById('results')
         // );
 
-
         // TODO:一定時間待つ
+
+      ///////////Reactで画像付きテキストコンポーネントを作成してみる/////////////////
+      //コンポーネントを利用
+      const dom1 = <div>
+        <PhotoText image="icon-iine" id="picture" />
+        <PhotoText image="icon-news" label="related news" />
+        <PhotoText image="icon-twitter01" label="related tweet" />
+      </div>
+      //ReactでDOMを書き換え
+      ReactDOM.render(dom1, document.getElementById('picture'))
+      //関数でコンポーネントを定義
+      function PhotoText (props){
+        const url = "./brastImages/" + props.image + ".jpeg"
+        const label = props.label
+        const boxStyle = {
+          border: "1px solid silver",
+          margin: "8px",
+          padding: "4px"
+        }
+        return <div style={boxStyle}>
+               <img src={url} width="128"/>
+               <span> {label} </span>
+        </div>
+      }
+
+
+              ///////////時計を2桁ずつそろえて表示してみる///////////////////////
+    //定期的に時間を表示
+    setInterval(showClock, 1000)
+    //毎秒実行される関数
+    function showClock () {
+      const d = new Date()
+      const [hour, min, sec] = [ //時分秒を各変数に代入
+      d.getHours(),
+      d.getMinutes(),
+      d.getSeconds() ]
+      const z2 = (v) => { //0で埋めて表示する関数を定義
+        const s = "00" + v
+        return s.substr(s.length - 2,2)
+      }
+      //表示するDOMを指定
+      const elem = <div>
+         {z2(hour)}:{z2(min)}:{z2(sec)}
+         </div>;
+         //DOMを書き換える
+      //const time = document.getElementById("time")
+      //ReactDOM.render(elem,time)
+      ReactDOM.render(elem,document.getElementById('time'))
+     }
 
       // TODO:ループを閉じる
     </script>
