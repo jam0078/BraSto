@@ -52,18 +52,6 @@
     <!-- load Jacascript -->
     <!-- <script type="text/javascript" src="./home.js"></script> -->
 
-    <style>
-        #view-source {
-          position: fixed;
-          display: block;
-          right: 0;
-          bottom: 0;
-          margin-right: 40px;
-          margin-bottom: 40px;
-          z-index: 900;
-        }
-        </style>
-
   </head>
   <body>
 
@@ -101,7 +89,7 @@
             <div class="demo-avatar-dropdown">
               
               <!-- チャネル名の表示from dynamoDB -->
-              <span><td><div id="channel"></div></td></span>
+              <span><td>Brast channel</td></span>
 
               <div class="mdl-layout-spacer"></div>
               <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -133,86 +121,176 @@
                   </nav>
       </div>
 
-          
-              <!-- Gridデモ画面 -->
-              <main class="mdl-layout__content mdl-color--grey-100">
-                  <div class="mdl-grid demo-content">
-                    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-                      <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                        <use xlink:href="#piechart" mask="url(#piemask)" />
-                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">55<tspan font-size="0.2" dy="-0.07">%</tspan></text>
-                      </svg>
+        
+       <!-- 上段  Cardデモ画面 -->
+     <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 
-                      <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                        <use xlink:href="#piechart" mask="url(#piemask)" />
-                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-                      </svg>
-                      
-                      <!-- from JS -->
-                      <svg fill="currentColor" width="600px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-                          <use xlink:href="#piechart" mask="url(#piemask)" />
-                    <text x="1.0" y="0.01" font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.1">latest comments-><tspan dy="-0.07" font-size="0.2"><div id="latestcomments"></div></tspan></text>
-                     </svg>
-     
-             <!-- upgdates部分画面 -->
-             <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-                <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
-                  <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                    <h2 class="mdl-card__title-text"><div id="members"></h2>
-                  </div>
-                  <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                    Online members
-                  </div>
+              <TABLE BORDER="0" width="100%">
+                  <TR>
+                  <TD>
+                  <table border="0" width="100%" height="100%">
+                  <tr>
+                      <td>
+                          <!-- <td><div id="members"></div></td> -->
+                          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                  <h2 class="mdl-card__title-text"><div id="time"></div></h2>
+                                </div>
+                                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                    Clock (sample)
+                                </div>
+                              </div>
+                             </div>
+                            </td>
+                  </tr>
+                  </table>
+                  </TD>
+                  <TD>
+                  <table border="0" width="100%" height="100%">
+                  <tr>
+                      <td>
+                          <!-- <td><div id="members"></div></td> -->
+                          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                  <h2 class="mdl-card__title-text">sssss</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                    Number of Guests
+                                </div>
+                              </div>
+                             </div>
+                            </td>
+                  </tr>
+                  </table>
+                  </TD>
+                  
+                  <TD>
+                      <table border="0" width="100%" height="100%">
+                      <tr>
+                          <td>
+                              <!-- <td><div id="members"></div></td> -->
+                              <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                                  <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                    <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                      <h3 class="mdl-card__title-text"><div id="latest_comments"></div></h3>
+                                    </div>
+                                    <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                        Latest Comments
+                                    </div>
+                                  </div>
+                                 </div>
+                                </td>
+                      </tr>
+                      </table>
+                      </TD>
+                  </TR>
+                  </TABLE>
 
-                <!-- パーツ Read moreボタン -->
-                <!-- <div class="mdl-card__actions mdl-card--border">
-                  <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
-                  </div> -->
-                </div>
-            <!-- upgdates部分画面 -->
-          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
-              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
-                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                  <h2 class="mdl-card__title-text"><div id="fixed"></div></h2>
-                </div>
-                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                  fixed words
-                </div>
-  
-                 <!-- パーツ Read moreボタン -->
-                <div class="mdl-card__actions mdl-card--border">
-                  <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
+                     
+
+     <!-- 2－3段目 Cardデモ画面 -->
+     <!-- <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"> -->
+
+              <TABLE BORDER="0" width="100%">
+                  <TR>
+                  <TD>
+                  <table border="0" width="100%" height="100%">
+                  <tr>
+                      <td>
+                          <!-- <td><div id="members"></div></td> -->
+                          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                  <h2 class="mdl-card__title-text"><div id="members"></div></h2>
+                                </div>
+                                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                    Online members
+                                </div>
+                              </div>
+                             </div>
+                            </td>
+                  </tr>
+                  </table>
+                  </TD>
+                  <TD>
+                  <table border="0" width="100%" height="100%">
+                  <tr>
+                      <td>
+                          <!-- <td><div id="members"></div></td> -->
+                          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                  <h2 class="mdl-card__title-text"><div id="fixed_words"></div></h2>
+                                </div>
+                                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                    fixed words
+                                </div>
+                              </div>
+                             </div>
+                            </td>
+                  </tr>
+                  </table>
+                  </TD>
+                  <TD>
+                      <table border="0" width="100%" height="100%">
+                      <tr>
+                          <td>
+                              <!-- <td><div id="members"></div></td> -->
+                              <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                                  <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                    <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                      <h3 class="mdl-card__title-text">Coming soon!</h3>
+                                    </div>
+                                    <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                        Online members
+                                    </div>
+                                  </div>
+                                 </div>
+                                </td>
+                      </tr>
+                      </table>
+                      </TD>
+                  </TR>
+
+                  <tr>
+                      <td colspan="3"  border="0" width="100%" height="100%">
+                          <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--16-col-tablet mdl-grid mdl-grid--no-spacing">
+                              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                                  <h3 class="mdl-card__title-text"><div id ="volatile_words"></div></h3>
+                                </div>
+                                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                                    Volatile words
+                                </div>
+                              </div>
+                            </div>
+                      </td>
+                      <!-- <td colspan="4"><div id="volatile"></div></td> -->
+                    </tr>
+                  </TABLE>
+
+           </div>
+       </div>
+    </main>
 
 
-
-          <!-- TODO:配置のコントロール tableタグでよいかも？ -->
-          <table>
-            <tr>
-              <!-- <td><div id="members"></div></td> -->
-              <td><div id="latestcomments"></div></td>
-              <td><div id="time"></div></td>
-              <td><div id="keywords"></div></td>
-              <!-- <td><div id="fixed"></div></td> -->
-            </tr>
-            <tr>
-              <td colspan="4"><div id="volatile"></div></td>
-            </tr>
-          </table>
-
-     
-   
-
+    <!-- DynamoBDからのDB情報取得スクリプト(JS)-->
     <script src="data_loader.js"></script>
+
+
+    <!-- HTML内 Javascript好文 -->
     <script type="text/babel">
 
-// //    setInterval("autoUpdate()", 呼び出し間隔（ミリ秒）)
-// setInterval("autoUpdate()", 1000)
-// function autoUpdate() {
-//   };
+
+
+
+
 
       // TODO:コンテンツのHTML化
       function SlackInfo(props) {
@@ -225,7 +303,7 @@
           return(<ul>{props.members.map(member => <li>{member.name}</li>)}</ul>);
       }
       function LatestComments(props) {
-          return(<ul>{props.latestcomments.map(latestcomments => <li>{latestcomments.comment}</li>)}</ul>);
+          return(<ul>{props.latest_comments.map(latest_comments => <li>{latest_comments.comment}</li>)}</ul>);
           //return(<p>{props.x}</p>);
       }
       function KeywordCloud(props) {
@@ -235,55 +313,64 @@
           return(<h4>{props.x}</h4>);
       }
       function BraStoFeixedWords(props) {
-          return(<h3>{props.fixedwords}</h3>);
+          return(<p>{props.fixed_words}</p>);
       }
       function BraStoFeixedWords(props) {
-          var str = props.fixedwords.join(',')
-          return(<h3>{str}</h3>);
+          var str = props.fixed_words.join(',')
+          return(<p>{str}</p>);
       }
       function BraStoVolatileWords(props) {
-          var str = props.volatile.join(',')
+          var str = props.volatile_words.join(',')
           return(<h4>{str}</h4>);
       }
-      // TODO:ループを回す
-        // TODO:DBからデータ取得する（別jsファイルに切り出してここでは関数コールのみ）
+
+
+      //setInterval("autoUpdate()", 呼び出し間隔（ミリ秒）)
+      // setInterval("autoUpdate()", 1000)
+      // function autoUpdate() {
+      // };
+      function renderAll() {
+        console.log("start");
         var data = load_data();
+      
         // TODO:必要な引数の受け渡し
         
         //Slack情報：チャネル名
-        ReactDOM.render(
-            <SlackInfo channel={data.slack_info.channel}/>,
-            document.getElementById('channel')
-        );
+        // ReactDOM.render(
+        //     <SlackInfo channel={data.slack_info.channel}/>,
+        //     document.getElementById('channel')
+        // );
         //Slack情報：メンバー情報
         ReactDOM.render(
-            <MembersCloud members={data.slack_info.members}/>,
+            <MembersCloud members={data.members}/>,
             document.getElementById('members')
         );
         ReactDOM.render(
             // <LatestComments x={'最新コメント'}/>,
             //<LatestComments x={'最新コメント'}/>,
-            <LatestComments latestcomments={data.latest_comments}/>,
-            document.getElementById('latestcomments')
+            <LatestComments latest_comments={data.latest_comments}/>,
+            document.getElementById('latest_comments')
         );
         ReactDOM.render(
-           <BraStoFeixedWords fixedwords={data.fixed_words}/>,
-            document.getElementById('fixed')
+           <BraStoFeixedWords fixed_words={data.fixed_words}/>,
+            document.getElementById('fixed_words')
         );
         // ReactDOM.render(
         //     <BraStoResultCards x={JSON.stringify(data.result)}/>,
         //     document.getElementById('results')
         // );
         ReactDOM.render(
-            <BraStoVolatileWords volatile={data.volatile_words}/>,
-            document.getElementById('volatile')
+            <BraStoVolatileWords volatile_words={data.volatile_words}/>,
+            document.getElementById('volatile_words')
         );
         // ReactDOM.render(
         //     <BraStoResultCards x={JSON.stringify(data.result)}/>,
         //     document.getElementById('results')
         // );
-
-        // TODO:一定時間待つ
+        console.log("ok");
+      }
+      renderAll();
+      setInterval(renderAll(), 3000);
 
       ///////////Reactで画像付きテキストコンポーネントを作成してみる/////////////////
       //コンポーネントを利用
