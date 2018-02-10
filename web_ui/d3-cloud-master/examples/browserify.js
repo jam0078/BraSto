@@ -1,4 +1,4 @@
-var d3 = require("d3"),
+var d3 = require("d3/d3.js"),
     cloud = require("../");
 
 var fill = d3.scale.category20();
