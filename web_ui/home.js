@@ -41,6 +41,6 @@ function renderAll() {
         <BraStoVolatileWords volatile_words={data.volatile_words}/>,
         document.getElementById('volatile_words')
     );
-    setTimeout(renderAll, 1000);
+    setTimeout(renderAll, 500);
 }
 renderAll();
