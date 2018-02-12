@@ -143,9 +143,17 @@
             <div className="mdl-grid">
                 {props.d.results.map((r, key) =>
                 <div key={key} className="output-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
-                    <div className="mdl-card__title mdl-color--light-blue-500">{r.title}</div>
-                    <div className="mdl-card__supporting-text">{r.content}</div>
-                    <div className="mdl-card__supporting-text">{r.engine + " (" + r.used_words.join("/") + ")" }</div>
+                    <div className="mdl-card__title mdl-color--light-blue-500">
+                        <div class="mdl-card__media">
+                            <img src={r.image} style={{padding:"0px"}}/>
+                        </div>
+                        <div style={{margin:"10px"}}>{r.title}</div>
+                    </div>
+                    <div className="mdl-card__supporting-text mdl-card--expand">{r.content}</div>
+                    
+                    <div className="mdl-card__actions mdl-card--border mdl-card__supporting-text">
+                        {r.engine + " (" + r.used_words.join("/") + ")" }
+                    </div>
                 </div>
                 )}
             </div>;
