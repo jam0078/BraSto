@@ -103,15 +103,15 @@
             }
         </style>
         <div class="mdl-grid">
-            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col">
+            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
                 <div class="mdl-card__title mdl-color--blue-grey-800">Members</div>
                 <div id="members" style="overflow:auto"></div>
             </div>
-            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col">
+            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
                 <div class="mdl-card__title mdl-color--blue-grey-800">Comments</div>
                 <div id="comments" style="overflow:auto"></div>
             </div>
-            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col">
+            <div class="input-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
                 <div class="mdl-card__title mdl-color--blue-grey-800">Keywords</div>
                 <div id="keywords" class="mdl-card__supporting-text"></div>
             </div>
@@ -142,7 +142,7 @@
         const Results = props =>
             <div className="mdl-grid">
                 {props.d.results.map((r, key) =>
-                <div key={key} className="output-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
+                <div key={key} className="output-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col  mdl-cell--4-col-phone">
                     <div className="mdl-card__title mdl-color--blue-900">
                         <div class="mdl-card__media">
                             <img src={r.image} style={{padding:"0px"}}/>
