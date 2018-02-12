@@ -143,8 +143,9 @@
             <div className="mdl-grid">
                 {props.d.results.map((r, key) =>
                 <div key={key} className="output-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col">
-                    <div className="mdl-card__title mdl-color--light-blue-500">{r.engine + " (" + r.used_words.join("+") + ")"}</div>
+                    <div className="mdl-card__title mdl-color--light-blue-500">{r.title}</div>
                     <div className="mdl-card__supporting-text">{r.content}</div>
+                    <div className="mdl-card__supporting-text">{r.engine + " (" + r.used_words.join("/") + ")" }</div>
                 </div>
                 )}
             </div>;
