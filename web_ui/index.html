@@ -129,12 +129,13 @@
                 {props.d.latest_comments.map((c, key) =>
                 <li key={key} className="demo_mdl-list__item mdl-list__item">
                     <div className="mdl-list__item-primary-content">
-                    <i className="material-icons mdl-list__item-icon">person</i>
-                    <b>{props.d.members.filter(m => m.id == c.member)[0].name}</b></div>
+                    <i className="material-icons mdl-list__item-icon">person</i></div>
+                      
                     <div className="mdl-list__item-secondary-content">{c.comment}</div>
                 </li>
                 )}
             </ul>;
+            //<b>{props.d.members.filter(m => m.id == c.member)[0].name}</b></div>
         // const Keywords = props => {
         //     const words = props.d.fixed_words.concat(props.d.volatile_words);
         //     return(<div>{words.join("/")}</div>);
